@@ -17,7 +17,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class CongestionTaxCalculatorService {
+public class CongestionTaxCalculatorService implements CongestionTaxFeeStrategy {
 
     @Autowired
     public EnvironmentService environmentService;
@@ -32,7 +32,7 @@ public class CongestionTaxCalculatorService {
         }).collect(Collectors.toList());
     }
 
-
+    @Override
     public int getTaxStatement(VehicleInfo vehicleInfo) throws CustomException {
         if(vehicleInfo.getDates().isEmpty()) {
             throw new CustomException("Entry date/time not found in request");
